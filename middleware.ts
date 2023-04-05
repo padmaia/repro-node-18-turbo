@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
+  try{
+    let x = await fetch('http://localhost:3000/api/hello');
+  console.log(await x.json());
+  } catch (e) {
+    console.error(e)
+  }
   if (request.nextUrl.pathname === '/about') {
     return NextResponse.redirect(new URL('/redirected', request.url))
   }
